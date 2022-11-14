@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const initialValues = {
   name: "",
@@ -27,14 +28,24 @@ const validate = (values) => {
   return errors;
 };
 
+const validationSchema = Yup.object({
+  name: Yup.string().required("Required"),
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Please, it is required"),
+  channel: Yup.string().required("Gimme your channel name"),
+});
+
 const YoutubeForm = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate,
+    // validate,
+    validationSchema,
   });
 
-  const { handleSubmit, values, handleChange, errors, handleBlur, touched } = formik;
+  const { handleSubmit, values, handleChange, errors, handleBlur, touched } =
+    formik;
 
   console.log("Form Fields Visited", touched);
 
@@ -49,9 +60,11 @@ const YoutubeForm = () => {
             name="name"
             onChange={handleChange}
             value={values.name}
-						onBlur={handleBlur}
+            onBlur={handleBlur}
           />
-          {touched.name && errors.name ? <div className="error" >{errors.name}</div> : null}
+          {touched.name && errors.name ? (
+            <div className="error">{errors.name}</div>
+          ) : null}
         </div>
         <div className="form-control">
           <label htmlFor="email">E-mail</label>
@@ -61,21 +74,25 @@ const YoutubeForm = () => {
             name="email"
             onChange={handleChange}
             value={values.email}
-						onBlur={handleBlur}
+            onBlur={handleBlur}
           />
-          {touched.email && errors.email ? <div className="error">{errors.email}</div> : null}
+          {touched.email && errors.email ? (
+            <div className="error">{errors.email}</div>
+          ) : null}
         </div>
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
           <input
-            type ="text"
+            type="text"
             id="channel"
             name="channel"
             onChange={handleChange}
             value={values.channel}
-						onBlur={handleBlur}
+            onBlur={handleBlur}
           />
-          {touched.channel && errors.channel ? <div className="error">{errors.channel}</div> : null}
+          {touched.channel && errors.channel ? (
+            <div className="error">{errors.channel}</div>
+          ) : null}
         </div>
         <button type="submit">Submit</button>
       </form>
