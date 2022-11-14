@@ -40,7 +40,7 @@ const OldYoutubeForm = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    // validate,
+    validate,
     validationSchema,
   });
 
