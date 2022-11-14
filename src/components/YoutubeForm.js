@@ -51,7 +51,7 @@ const YoutubeForm = () => {
             value={values.name}
 						onBlur={handleBlur}
           />
-          {errors.name ? <div className="error" >{errors.name}</div> : null}
+          {touched.name && errors.name ? <div className="error" >{errors.name}</div> : null}
         </div>
         <div className="form-control">
           <label htmlFor="email">E-mail</label>
@@ -63,19 +63,19 @@ const YoutubeForm = () => {
             value={values.email}
 						onBlur={handleBlur}
           />
-          {errors.email ? <div className="error">{errors.email}</div> : null}
+          {touched.email && errors.email ? <div className="error">{errors.email}</div> : null}
         </div>
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
           <input
-            type="text"
+            type ="text"
             id="channel"
             name="channel"
             onChange={handleChange}
             value={values.channel}
 						onBlur={handleBlur}
           />
-          {errors.channel ? <div className="error">{errors.channel}</div> : null}
+          {touched.channel && errors.channel ? <div className="error">{errors.channel}</div> : null}
         </div>
         <button type="submit">Submit</button>
       </form>
