@@ -35,6 +35,8 @@ const YoutubeForm = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      // validateOnChange={false}
+      // validateOnBlur={false}
     >
       <Form>
         <div className="form-control">
@@ -52,7 +54,7 @@ const YoutubeForm = () => {
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
           <Field type="text" id="channel" name="channel" />
-          <ErrorMessage name="channel" />
+          <ErrorMessage name="channel" component={TextError}/>
         </div>
         <div className="form-control">
           <label htmlFor="comments">Comments</label>
@@ -65,7 +67,7 @@ const YoutubeForm = () => {
           <FastField name="address">
             {(props) => {
               const { field, meta } = props;
-              console.log("Render Props: ", props);
+              // console.log("Render Props: ", props);
               return (
                 <div>
                   <input type="text" id="address" {...field} />
@@ -98,6 +100,7 @@ const YoutubeForm = () => {
               const { push, remove, form } = fieldArrayProps;
               const { values } = form;
               const { phNumbers } = values;
+              console.log('Form Errors: ', form.errors);
               return (
                 <div>
                   {phNumbers.map((phNumber, index) => (
